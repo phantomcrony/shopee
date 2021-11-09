@@ -245,6 +245,8 @@ function ScrapSite() {
 
                                     //Execute ink to send message to telegram
                                     https.get(sendurl, (resp) => {
+                                        //Delay for the http request
+                                        await new Promise(resolve => setTimeout(resolve, 5000))
                                         
                                         //Post Message to  Discord channel
                                         client.channels.cache.get(`${process.env.DISCORD_CHANNEL_ID}`).send(productEmbed);
@@ -254,8 +256,6 @@ function ScrapSite() {
                                         console.log("Error: " + err.message);w
                                     });
 
-                                    //Delay for the http request
-                                    await new Promise(resolve => setTimeout(resolve, 5000))
 
                                     //Set Flag to true
                                     flag=true

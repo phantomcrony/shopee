@@ -6,6 +6,7 @@ let RegionSchema = new Schema({
     product_name: {
         type: String,
         required: true,
+        unique:true
         
     },
     link: {

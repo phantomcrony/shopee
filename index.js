@@ -159,6 +159,21 @@ function ScrapSite() {
                     'link': links[i],
                     'priceafter': pricesafter[i],
                 });
+                
+                
+                var text =  `[​​](https://www.freepnglogos.com/uploads/shopee-logo/logo-shopee-png-images-download-shopee-1.png) ***📌 ${products[i].product_name}*** %0A 💵 ${products[i].priceafter} %0A 🌎 ${products[i].link}`
+
+                var sendurl = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chat_id}&text=${text}&parse_mode=markdown&disable_web_page_preview=false`;
+
+                https.get(sendurl, (resp) => {
+
+                }).on("error", (err) => {
+                    console.log("Error: " + err.message);w
+                });
+
+                //Delay for the http request
+                await new Promise(resolve => setTimeout(resolve, 5000));
+
 
             }
 
@@ -237,26 +252,8 @@ function ScrapSite() {
                                     //Insert Data into MongoDB
                                     await scheme.insertMany([element])
                                     
-                                    //Text To send to Telegram
-                                    var text =  `[​​](https://www.freepnglogos.com/uploads/shopee-logo/logo-shopee-png-images-download-shopee-1.png) ***📌 ${products[i].product_name}*** %0A 💵 ${products[i].priceafter} %0A 🌎 ${products[i].link}`
-                                    
-                                    //Telegram Bot Endpoint
-                                    var sendurl = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chat_id}&text=${text}&parse_mode=markdown&disable_web_page_preview=false`;   
-
-                                    https.get(sendurl, (resp) => {
-
-                                        setTimeout(task, 8000);
-
-                                        function task (){
-
-                                            //Post Message to  Discord channel
-                                            client.channels.cache.get(`${process.env.DISCORD_CHANNEL_ID}`).send(productEmbed);
-
-                                        }
-
-                                    }).on("error", (err) => {
-                                        console.log("Error: " + err.message);w
-                                    });
+                                    //Post Message to  Discord channel
+                                    client.channels.cache.get(`${process.env.DISCORD_CHANNEL_ID}`).send(productEmbed);
 
                                     //Set Flag to true
                                     flag=true

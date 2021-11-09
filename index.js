@@ -2,6 +2,7 @@ const Discord = require('discord.js');
 const cheerio = require('cheerio');
 const puppeteer = require('puppeteer');
 const mongoose = require('mongoose');
+const https = require('https')
 const scheme = require('./schema/scheme');
 const {comparer} = require('./comparer/comparer');
 
@@ -235,10 +236,7 @@ function ScrapSite() {
                                 try{
                                     //Insert Data into MongoDB
                                     await scheme.insertMany([element])
-
-                                    //Post Message to  Discord channel
-                                    client.channels.cache.get(`${process.env.DISCORD_CHANNEL_ID}`).send(productEmbed);
-
+                                    
                                     //Text To send to Telegram
                                     var text =  `[​​](https://www.freepnglogos.com/uploads/shopee-logo/logo-shopee-png-images-download-shopee-1.png) ***📌 ${products[i].product_name}*** %0A 💵 ${products[i].priceafter} %0A 🌎 ${products[i].link}`
                                     
@@ -247,6 +245,9 @@ function ScrapSite() {
 
                                     //Execute ink to send message to telegram
                                     https.get(sendurl, (resp) => {
+                                        
+                                        //Post Message to  Discord channel
+                                        client.channels.cache.get(`${process.env.DISCORD_CHANNEL_ID}`).send(productEmbed);
                                     
                                     //Retrun if there any error
                                     }).on("error", (err) => {
@@ -255,7 +256,6 @@ function ScrapSite() {
 
                                     //Delay for the http request
                                     await new Promise(resolve => setTimeout(resolve, 5000))
-
 
                                     //Set Flag to true
                                     flag=true

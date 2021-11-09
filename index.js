@@ -243,19 +243,20 @@ function ScrapSite() {
                                     //Telegram Bot Endpoint
                                     var sendurl = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chat_id}&text=${text}&parse_mode=markdown&disable_web_page_preview=false`;   
 
-                                    //Execute ink to send message to telegram
                                     https.get(sendurl, (resp) => {
-                                        //Delay for the http request
-                                        await new Promise(resolve => setTimeout(resolve, 5000))
-                                        
-                                        //Post Message to  Discord channel
-                                        client.channels.cache.get(`${process.env.DISCORD_CHANNEL_ID}`).send(productEmbed);
-                                    
-                                    //Retrun if there any error
+
+                                        setTimeout(task, 8000);
+
+                                        function task (){
+
+                                            //Post Message to  Discord channel
+                                            client.channels.cache.get(`${process.env.DISCORD_CHANNEL_ID}`).send(productEmbed);
+
+                                        }
+
                                     }).on("error", (err) => {
                                         console.log("Error: " + err.message);w
                                     });
-
 
                                     //Set Flag to true
                                     flag=true

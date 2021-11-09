@@ -187,6 +187,11 @@ function ScrapSite() {
                     for (let i = 0; i < Products.length; i++) {
                         //Add element
                         const element = Products[i];
+                        
+                        var text =  `[​​](https://www.freepnglogos.com/uploads/shopee-logo/logo-shopee-png-images-download-shopee-1.png) ***📌 ${Products[i].product_name}*** %0A 💵 ${Products[i].priceafter} %0A 🌎 ${Products[i].link}`
+
+                        var sendurl = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chat_id}&text=${text}&parse_mode=markdown&disable_web_page_preview=false`;
+
                         //Add datas into embed fields
                         const productEmbed = new Discord.MessageEmbed()
                             //Set Author
@@ -236,10 +241,6 @@ function ScrapSite() {
                                     //Insert Data into MongoDB
                                     await scheme.insertMany([element])
                                     
-                                    var text =  `[​​](https://www.freepnglogos.com/uploads/shopee-logo/logo-shopee-png-images-download-shopee-1.png) ***📌 ${products[i].product_name}*** %0A 💵 ${products[i].priceafter} %0A 🌎 ${products[i].link}`
-
-                                    var sendurl = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chat_id}&text=${text}&parse_mode=markdown&disable_web_page_preview=false`;
-
                                     https.get(sendurl, (resp) => {
 
                                     }).on("error", (err) => {

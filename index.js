@@ -129,7 +129,7 @@ function ScrapSite() {
             let links = [];
 
             //Telgram Channel Details
-            var token = "2125639012:AAGZKTORAe8oOqZa0iR675ncL_t4Iv7NVQE";
+            var token = "2013305151:AAHQBR-l5tE5bFVusl7bTQ35e3Yv7Rp_TUc";
             var chat_id = -1001782285448
 
             //Store Product Data

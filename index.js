@@ -19,7 +19,7 @@ client.on("ready", async () => {
             // The message shown
             name: `${process.env.BOT_STATUS}`,
             // PLAYING, WATCHING, LISTENING, STREAMING
-            type: "WATCHING"
+            type: "WATCHING SHOPEE"
         }
     });
 

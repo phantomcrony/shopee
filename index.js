@@ -35,7 +35,7 @@ client.on("ready", async () => {
 
         () => {
             //Tell Database is Connected
-            console.log('Database is connected')
+            console.log('Database is connected!')
             //Set interval of scraping
             setInterval(ScrapSite, `${process.env.SCRAPE_INTERVAL}`);
         }, //If cannot connect to database
